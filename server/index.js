@@ -147,7 +147,9 @@ app.post("/", async (req, res) => {
 app.get("/", async (req, res) => {
   try {
     const questions = await Question.find();
-    res.json(questions);
+    const shuffledQuestions = questions.sort(() => 0.5 - Math.random());
+    let selected = shuffledQuestions.slice(0, 5);
+    res.json(selected);
   } catch (error) {
     res.json(error);
   }
